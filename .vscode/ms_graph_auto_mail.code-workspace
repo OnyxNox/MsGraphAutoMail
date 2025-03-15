@@ -1,0 +1,32 @@
+{
+    "extensions": {
+        "recommendations": [
+            "fill-labs.dependi",
+            "ms-vscode.cpptools",
+            "rust-lang.rust-analyzer",
+            "tamasfe.even-better-toml"
+        ]
+    },
+    "folders": [
+        {
+            "path": ".."
+        }
+    ],
+    "launch": {
+        "version": "0.2.0",
+        "configurations": [],
+    },
+    "settings": {
+        "debug.allowBreakpointsEverywhere": true,
+        "editor.formatOnSave": true,
+        "editor.rulers": [
+            100,
+            120,
+        ],
+        "files.eol": "\n",
+    },
+    "tasks": {
+        "version": "2.0.0",
+        "tasks": []
+    }
+}
