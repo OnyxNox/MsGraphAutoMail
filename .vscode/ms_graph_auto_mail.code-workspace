@@ -2,6 +2,7 @@
     "extensions": {
         "recommendations": [
             "fill-labs.dependi",
+            "humao.rest-client",
             "ms-vscode.cpptools",
             "rust-lang.rust-analyzer",
             "tamasfe.even-better-toml"

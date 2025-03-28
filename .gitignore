@@ -1,5 +1,9 @@
 # Generic ignore
-*.ignore*
+*.ignore.*
+
+# Input / Output data directory
+/.data/*
+!/.data/*.template.*
 
 # Rust binary output directory
 /target
