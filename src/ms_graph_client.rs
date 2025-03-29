@@ -1,5 +1,4 @@
-mod access_token_response;
-mod authentication;
+mod models;
 mod oauth2_authorization_server;
 
 use std::{collections::HashMap, error, sync::LazyLock};
@@ -10,7 +9,7 @@ use oauth2_authorization_server::OAuth2AuthorizationServer;
 use reqwest::Client;
 use url::Url;
 
-use self::{access_token_response::AccessTokenResponse, authentication::Authentication};
+use self::models::{AccessTokenResponse, Authentication};
 
 /// Microsoft Graph APIs base URL.
 static MS_GRAPH_BASE_URL: LazyLock<Url> = LazyLock::new(|| {
