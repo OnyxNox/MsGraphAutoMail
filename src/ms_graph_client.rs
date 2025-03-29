@@ -13,6 +13,8 @@ use url::Url;
 
 use self::models::{AccessTokenResponse, Authentication};
 
+const MS_GRAPH_SCOPES: &str = "offline_access Mail.ReadWrite User.Read";
+
 /// Microsoft Graph APIs base URL.
 static MS_GRAPH_BASE_URL: LazyLock<Url> = LazyLock::new(|| {
     Url::parse("https://graph.microsoft.com/v1.0/")
@@ -91,7 +93,7 @@ impl MsGraphClient {
 
         let mut request_params = HashMap::new();
         request_params.insert("client_id", authentication.client_id.clone());
-        request_params.insert("scope", "offline_access User.Read".into());
+        request_params.insert("scope", MS_GRAPH_SCOPES.into());
         request_params.insert("code", authorization_code);
         request_params.insert(
             "redirect_uri",
@@ -132,9 +134,9 @@ impl MsGraphClient {
             &response_type=code\
             &redirect_uri=http://localhost:8383/oauth2/redirect\
             &response_mode=query\
-            &scope=offline_access User.Read\
+            &scope={}\
             &state={}",
-            &tenant_id, &client_id, &security_state
+            &tenant_id, &client_id, MS_GRAPH_SCOPES, &security_state
         ))
         .expect("failed to parse OAuth2 authorization code URL");
 
