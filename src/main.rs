@@ -9,7 +9,7 @@ use std::{
 use chrono::Utc;
 use log::{LevelFilter, debug, info, trace};
 
-use crate::ms_graph_client::MsGraphClient;
+use crate::ms_graph_client::{MsGraphClient, models::User};
 
 /// Application entry point.
 #[tokio::main]
@@ -25,9 +25,9 @@ async fn main() -> Result<(), Box<dyn error::Error>> {
 
     let graph_client = MsGraphClient::new(authentication).await?;
 
-    let user = graph_client.get("/me").await?;
+    let user = graph_client.get::<User>("/me").await?;
 
-    info!("Welcome {}!", user);
+    info!("Welcome {} to MS Graph Auto Mail!", user.given_name);
 
     Ok(())
 }

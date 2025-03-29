@@ -24,3 +24,11 @@ pub struct Authentication {
     /// Microsoft Entra ID tenant identifier used to authenticate with Microsoft Graph APIs.
     pub tenant_id: String,
 }
+
+/// Represents a Microsoft Entra user account.
+#[derive(Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct User {
+    /// Given name (first name) of the user.
+    pub given_name: String,
+}

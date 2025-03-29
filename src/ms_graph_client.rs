@@ -1,4 +1,5 @@
-mod models;
+pub mod models;
+
 mod oauth2_authorization_server;
 
 use std::{collections::HashMap, error, sync::LazyLock};
@@ -7,6 +8,7 @@ use chrono::{Duration, Utc};
 use log::{debug, trace};
 use oauth2_authorization_server::OAuth2AuthorizationServer;
 use reqwest::Client;
+use serde::de::DeserializeOwned;
 use url::Url;
 
 use self::models::{AccessTokenResponse, Authentication};
@@ -48,7 +50,17 @@ impl MsGraphClient {
     }
 
     /// Send a HTTP GET request to the given Microsoft Graph API path.
-    pub async fn get(&self, path: &str) -> Result<String, Box<dyn error::Error>> {
+    pub async fn get<T>(&self, path: &str) -> Result<T, Box<dyn error::Error>>
+    where
+        T: DeserializeOwned,
+    {
+        Ok(serde_json::from_str::<T>(
+            self.get_text(path).await?.as_str(),
+        )?)
+    }
+
+    /// Send a HTTP GET request to the given Microsoft Graph API path.
+    pub async fn get_text(&self, path: &str) -> Result<String, Box<dyn error::Error>> {
         let path = path.trim_start_matches('/');
         let url = MS_GRAPH_BASE_URL.join(path)?;
 
